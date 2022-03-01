@@ -8,3 +8,6 @@
     box-shadow: 5px 10px #888888
     
 }
+#error{
+    display: none;
+}
