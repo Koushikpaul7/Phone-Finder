@@ -12,7 +12,7 @@ const loadPhones=()=>{
         }
         else{
             document.getElementById('error').style.display="none";
-            displayPhones(data.data)
+            displayPhones(data.data.slice(0,20));
         }
     });
     searchField.value='';
