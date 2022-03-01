@@ -1,0 +1,10 @@
+#detail-style{
+    border-bottom: 2px solid rgba(216, 174, 34, 0.749);
+    border-left: 2px solid greenyellow;
+    border-radius: 30px;
+}
+
+#result-style{
+    box-shadow: 5px 10px #888888
+    
+}
