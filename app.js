@@ -1,3 +1,4 @@
+// load data
 const loadPhones=()=>{
     document.getElementById("search-result").innerHTML='';
     document.getElementById("phone-details").innerHTML=''
@@ -7,6 +8,7 @@ const loadPhones=()=>{
     
     .then(res=>res.json())
     .then(data=>{
+        // error handling
         if(data.data.length===0||searchPhone==""){
             document.getElementById('error').style.display="block";
         }
@@ -17,8 +19,8 @@ const loadPhones=()=>{
     });
     searchField.value='';
 }
+// display the phones
 const displayPhones= phones =>{
-    //console.log(phones);
    
     phones.forEach(phone=>{
         const searchResult= document.getElementById("search-result");
@@ -35,11 +37,13 @@ const displayPhones= phones =>{
         searchResult.appendChild(div);
     })
 }
+// loading details
 const loadDetails=(info)=>{
     fetch(`https://openapi.programming-hero.com/api/phone/${info}`)
     .then(res=>res.json())
     .then(data=>dispayDetails(data.data))
 }
+// display details
 const dispayDetails=data=>{
     console.log(data);
     document.getElementById("phone-details").innerHTML='';
@@ -51,13 +55,13 @@ const dispayDetails=data=>{
     <div class="card-body">
       <h5 class="card-title">Brand: ${data.brand}</h5>
       <h5 class="card-title">Name: ${data.name}</h5>
-      <p class="card-text">Release Date: ${data?.releaseDate?data.releaseDate:'released date not found'}</p>
-      <p class="card-text">Display: ${data.mainFeatures.displaySize}</p>
+      <p class="card-text"><strong>Released Date:</strong> ${data?.releaseDate?data.releaseDate:'released date not found'}</p>
+      <p class="card-text"><strong>Display:</strong> ${data.mainFeatures.displaySize}</p>
       <p class="card-text"><strong>Memory:</strong> ${data.mainFeatures.memory}</p>
-      <p class="card-text">Chipset: ${data.mainFeatures.chipSet}</p>
-      <p class="card-text">Others: 
+      <p class="card-text"><strong>Chipset:</strong>${data.mainFeatures.chipSet}</p>
+      <p class="card-text"><strong>Others:</strong> 
       ${data?.others?.Bluetooth?data.others.Bluetooth:'no data found'}  ${data?.others?.GPS?data.others.GPS:''} ${data?.others?.WLAN?data.others.WLAN:''}</p>
-      <p class="card-text">Sensors: ${data.mainFeatures.sensors[0]},${data.mainFeatures.sensors[1]},${data.mainFeatures.sensors[2]},${data.mainFeatures.sensors[3]},${data.mainFeatures.sensors[4]?data.mainFeatures.sensors[4]:''},${data.mainFeatures?.sensors[5]?data?.mainFeatures?.sensors[5]:''}</p>
+      <p class="card-text"><strong>Sensors:</strong> ${data.mainFeatures.sensors[0]},${data.mainFeatures.sensors[1]?data?.mainFeatures?.sensors[1]:''},${data.mainFeatures.sensors[2]?data?.mainFeatures?.sensors[2]:''},${data.mainFeatures.sensors[3]?data?.mainFeatures?.sensors[3]:''},${data.mainFeatures.sensors[4]?data.mainFeatures.sensors[4]:''},${data.mainFeatures?.sensors[5]?data?.mainFeatures?.sensors[5]:''}</p>
     </div>
     </div>
     `;
